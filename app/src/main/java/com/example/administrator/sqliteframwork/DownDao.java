@@ -16,6 +16,11 @@ public class DownDao extends BaseDao {
     }
 
     @Override
+    protected Class getTClass() {
+        return  DownFile.class;
+    }
+
+    @Override
     public List query(String sql) {
         return null;
     }

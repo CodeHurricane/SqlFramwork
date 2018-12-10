@@ -7,37 +7,36 @@ import android.os.Environment;
  * Created by Administrator on 2017/1/9 0009.
  */
 
-public class BaseDaoFactory {
+public class DbFactory {
+
     private String sqliteDatabasePath;
 
     private SQLiteDatabase sqLiteDatabase;
-
-    private static  BaseDaoFactory instance=new BaseDaoFactory();
-    public BaseDaoFactory()
-    {
-        sqliteDatabasePath= Environment.getExternalStorageDirectory().getAbsolutePath()+"/teacher.db";
+    private static final String DB_NAME="/temp.db";
+    private static DbFactory instance=new DbFactory();
+    public DbFactory()
+    {   sqliteDatabasePath= Environment.getExternalStorageDirectory().getAbsolutePath()+DB_NAME;
         openDatabase();
     }
-        public  synchronized  <T extends  BaseDao<M>,M> T
-        getDataHelper(Class<T> clazz,Class<M> entityClass)
-        {
+
+    public  synchronized  <T extends  BaseDao> T getDataHelper(Class<T> clazz){
             BaseDao baseDao=null;
             try {
                 baseDao=clazz.newInstance();
-                baseDao.init(entityClass,sqLiteDatabase);
-            } catch (InstantiationException e) {
+                baseDao.init(baseDao.getTClass(),sqLiteDatabase);
+            } catch(InstantiationException e){
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
-
             return (T) baseDao;
         }
-    private void openDatabase() {
+
+    private void openDatabase(){
         this.sqLiteDatabase=SQLiteDatabase.openOrCreateDatabase(sqliteDatabasePath,null);
     }
 
-    public  static  BaseDaoFactory getInstance()
+    public  static DbFactory getInstance()
     {
         return instance;
     }

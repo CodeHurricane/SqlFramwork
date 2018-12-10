@@ -70,14 +70,15 @@ public abstract class BaseDao<T> implements  IBaseDao<T> {
               {
                   return  false;
               }
-                if(!TextUtils.isEmpty(createTable()))
+                String createTables=createTable();
+                if(!TextUtils.isEmpty(createTables))
                 {
-                    database.execSQL(createTable());
+                   database.execSQL(createTables);
                 }
               cacheMap=new HashMap<>();
-              initCacheMap();
+               initCacheMap();
 
-            isInit=true;
+             isInit=true;
         }
         return  isInit;
     }
@@ -397,4 +398,7 @@ public abstract class BaseDao<T> implements  IBaseDao<T> {
      * @return
      */
     protected  abstract  String createTable();
+
+    protected  abstract  Class getTClass();
+
 }

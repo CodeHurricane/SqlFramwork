@@ -15,7 +15,10 @@ public class UserDao extends BaseDao {
         return "create table if not exists tb_user(user_Id int,name varchar(20),password varchar(10))";
     }
 
-
+    @Override
+    protected Class getTClass() {
+        return User.class;
+    }
     @Override
     public List query(String sql) {
 
