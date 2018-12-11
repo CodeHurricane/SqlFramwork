@@ -1,4 +1,4 @@
-package com.example.administrator.sqliteframwork.db;
+package com.example.administrator.sqliteframwork.db.db_core;
 
 import java.util.List;
 

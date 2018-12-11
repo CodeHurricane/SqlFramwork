@@ -1,4 +1,4 @@
-package com.example.administrator.sqliteframwork.db;
+package com.example.administrator.sqliteframwork.db.db_core;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -24,7 +24,7 @@ public abstract class BaseDao<T> implements  IBaseDao<T> {
     /**]
      * 持有数据库操作类的引用
      */
-    private SQLiteDatabase database;
+    protected SQLiteDatabase database;
     /**
      * 保证实例化一次
      */
